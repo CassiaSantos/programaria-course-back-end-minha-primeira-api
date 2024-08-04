@@ -51,6 +51,30 @@ function criaMulher(request, response){
   response.json(mulheres)
 }
 
+//PATCH - correção de mulher
+//se o id passado como requisição for encontrar na lista de mulheres, as propriedades alteradas serão gravadas
+function corrigeMulher(request, response) {
+    function encontraMulher(mulher) {
+        if (mulher.id === request.params.id) {
+            return mulher
+        }
+    }
+    const mulherEncontrada = mulheres.find(encontraMulher)
+    if (request.body.nome) {
+        mulherEncontrada.nome = request.body.nome
+    }
+
+    if (request.body.minibio) {
+        mulherEncontrada.minibio = request.body.minibio
+    }
+
+    if (request.body.imagem) {
+        mulherEncontrada.imagem = request.body.imagem
+    }
+
+    response.json(mulheres)
+}
+
 //verbo HTTP DELETE - "Deleção" de mulher da lista:
 //será recebido um id como parâmetro e todas as mulheres com ID diferente daquele serão adicionadas a uma nova lista que
 //será retornada em formato json.
@@ -73,6 +97,8 @@ function mostraPorta() {
 app.use(router.get('/mulheres', mostraMulheres))
 //configura rota POST /mulheres
 app.use(router.post('/mulheres', criaMulher))
+//configura rota PATCH /mulheres
+app.use(router.patch('/mulheres/:id', corrigeMulher))
 //configura a rota DELETE /mulheres
 app.use(router.delete('/mulheres/:id', deletaMulhee))
 //srvidor ouve porta:
