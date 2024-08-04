@@ -8,6 +8,7 @@
 
 ``` npm install express ``` - para instalar o pacote express
 
+```npm install uuid``` - para instalar o UUID e permitir geração de ids únicos e automáticos
 
 ## Pensamento computacional:
 ### Pilares:
