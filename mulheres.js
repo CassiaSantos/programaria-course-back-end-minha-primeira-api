@@ -37,7 +37,7 @@ function mostraMulheres(request, response) {
     response.json(mulheres)
 }
 
-//POST - função para criar mulhere
+//POST - função para criar mulher
 function criaMulher(request, response){
   const NovaMulher = {
     id: uuidv4(),
@@ -51,12 +51,29 @@ function criaMulher(request, response){
   response.json(mulheres)
 }
 
+//verbo HTTP DELETE - "Deleção" de mulher da lista:
+//será recebido um id como parâmetro e todas as mulheres com ID diferente daquele serão adicionadas a uma nova lista que
+//será retornada em formato json.
+function deletaMulher(request, response) {
+    function todasMenosEla(mulher) {
+        if(mulher.id !== request.params.id) {
+            return mulher
+        }
+    }
+    const mulheresQueFicaram = mulheres.filter(todasMenosEla)
+    response.json(mulheresQueFicaram)
+}
+
+
 function mostraPorta() {
     console.log("Servidor criado e rodando na porta ", porta)
 }
+
 //configura rota GET /mulheres
 app.use(router.get('/mulheres', mostraMulheres))
 //configura rota POST /mulheres
 app.use(router.post('/mulheres', criaMulher))
+//configura a rota DELETE /mulheres
+app.use(router.delete('/mulheres/:id', deletaMulhee))
 //srvidor ouve porta:
 app.listen(porta, mostraPorta)
