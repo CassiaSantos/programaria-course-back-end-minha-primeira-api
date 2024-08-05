@@ -10,6 +10,8 @@
 
 ```npm install uuid``` - para instalar o UUID e permitir geração de ids únicos e automáticos
 
+``` npm install mongoose ``` - pacote necessário para usar o Mongo DB
+
 ## Pensamento computacional:
 ### Pilares:
 <p>Decomposição: dividir o problema em partes menores;</p>
