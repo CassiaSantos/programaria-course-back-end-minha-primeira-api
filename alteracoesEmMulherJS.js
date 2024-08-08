@@ -1,5 +1,5 @@
-// ------------- alteração no mulheres JS: -----------------
-
+// ------------- alteração no mulheres JS - GET: -----------------
+//feat: salvando dados no banco de dados
 //APAGA DA MULHERES JS
 
 const mulheres = [
@@ -37,6 +37,44 @@ async function mostraMulheres(request, response) {
         response.json(mulheresVindasDoBancoDeDados)
 
     //caso ocorra algum problema, mostre o erro no console
+    } catch (erro) {
+        console.log(erro)
+    }
+}
+
+
+// ------------- alteração no mulheres JS - POST: -----------------
+//feat: salvando mulher no banco de dados
+
+//DELETA:
+//biblioteca UUID:
+const{v4:uuidv4} = require('uuid')
+
+//A lista inicial não existe mais então não é mais necessário isso:
+//dados da nova mulher é inserida na lista de mulheres: 
+mulheres.push(NovaMulher)
+
+
+    //retorna lista atualizada:
+    response.json(mulheres)//deleta pois a partir de agora os dados estão atrelados ao banco de dados
+
+//ACRESCENTA:
+
+//MODIFICA:
+//POST - função para criar mulher
+async function criaMulher(request, response){
+    //Uma mulher é salva como objeto que tem a regra que vem do Model
+    const NovaMulher = new Mulher({
+      nome: request.body.nome, //vem de dentro da requisição quando o nome for preenchido.
+      imagem: request.body.imagem,
+      minibio: request.body.minibio,
+      citacao: request.body.citacao
+    })
+
+    try {
+        const mulherCriada = await NovaMulher.save()//os dados da nova mulher serão salvos;
+        response.status(201).json(mulherCriada) //se a nova mulher for salva com sucesso, será retornado o código 201;
+    
     } catch (erro) {
         console.log(erro)
     }
