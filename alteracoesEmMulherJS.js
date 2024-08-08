@@ -1,3 +1,5 @@
+//"Mulher" será usado toda vez que me referir ao banco de dados no MONGO DB:
+
 // ------------- alteração no mulheres JS - GET: -----------------
 //feat: salvando dados no banco de dados
 //APAGA DA MULHERES JS
@@ -24,7 +26,7 @@ const mulheres = [
 
 
 
-//cria variável para recuperar dados do Model:
+//cria variável para recuperar dados do Model --> toda vez que me referir ao banco de dados no MONGO DB:
 const Mulher = require('./mulherModel')
 
 
@@ -75,6 +77,48 @@ async function criaMulher(request, response){
         const mulherCriada = await NovaMulher.save()//os dados da nova mulher serão salvos;
         response.status(201).json(mulherCriada) //se a nova mulher for salva com sucesso, será retornado o código 201;
     
+    } catch (erro) {
+        console.log(erro)
+    }
+}
+
+// ------------- alteração no mulheres JS - PATCH: -----------------
+async function corrigeMulher(request, response) {
+    try {
+        const mulherEncontrada = await Mulher.findById(request.params.id)//encontra mulher pela URL da requisição
+
+        // se alguém preencher o campo nome, o mesmo será sobrescrito:
+        if (request.body.nome) {
+            mulherEncontrada.nome = request.body.nome
+        }
+    
+        if (request.body.minibio) {
+            mulherEncontrada.minibio = request.body.minibio
+        }
+    
+        if (request.body.imagem) {
+            mulherEncontrada.imagem = request.body.imagem
+        }
+        
+        if (request.body.citacao) {
+            mulherEncontrada.citacao = request.body.citacao
+        }
+
+        const mulherAtualizadaNoBancoDeDados = await mulherEncontrada.save()
+        response.json(mulherAtualizadaNoBancoDeDados)
+
+    } catch (erro) {
+        console.log(erro)
+    }
+}
+
+// ------------- alteração no mulheres JS - PATCH: -----------------
+//feat: deletando dados no banco de dados
+//para se comunicar com um serviço externo, utiliza-se o JS assíncrono para que o sertviço e outros recursos sejam carregados ao mesmo tempo: palavra reservada "async"
+async function deletaMulher(request, response) {
+    try {
+        await Mulher.findByIdAndDelete(request.params.id)
+        response.json({message: 'Diva Tech deletada com sucesso!'})
     } catch (erro) {
         console.log(erro)
     }
