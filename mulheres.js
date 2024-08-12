@@ -4,6 +4,11 @@ const express = require("express")
 const router = express.Router()
 //biblioteca UUID:
 const{v4:uuidv4} = require('uuid')
+
+//uso de conexão com o banco de dados:
+const conectaBancoDeDados = require('./bancoDeDados')
+conectaBancoDeDados()
+
 //inicia o app:
 const app = express()
 //trata resposta da requisição para formato jSON:
@@ -100,6 +105,6 @@ app.use(router.post('/mulheres', criaMulher))
 //configura rota PATCH /mulheres
 app.use(router.patch('/mulheres/:id', corrigeMulher))
 //configura a rota DELETE /mulheres
-app.use(router.delete('/mulheres/:id', deletaMulhee))
+app.use(router.delete('/mulheres/:id', deletaMulher))
 //srvidor ouve porta:
 app.listen(porta, mostraPorta)
