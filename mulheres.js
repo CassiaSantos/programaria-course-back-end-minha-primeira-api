@@ -53,40 +53,44 @@ async function criaMulher(request, response){
 }
 
 //PATCH - correção de mulher
-//se o id passado como requisição for encontrar na lista de mulheres, as propriedades alteradas serão gravadas
-function corrigeMulher(request, response) {
-    function encontraMulher(mulher) {
-        if (mulher.id === request.params.id) {
-            return mulher
+async function corrigeMulher(request, response) {
+    try {
+        const mulherEncontrada = await Mulher.findById(request.params.id)//encontra mulher pela URL da requisição
+
+        // se alguém preencher o campo nome, o mesmo será sobrescrito:
+        if (request.body.nome) {
+            mulherEncontrada.nome = request.body.nome
         }
-    }
-    const mulherEncontrada = mulheres.find(encontraMulher)
-    if (request.body.nome) {
-        mulherEncontrada.nome = request.body.nome
-    }
+    
+        if (request.body.minibio) {
+            mulherEncontrada.minibio = request.body.minibio
+        }
+    
+        if (request.body.imagem) {
+            mulherEncontrada.imagem = request.body.imagem
+        }
+        
+        if (request.body.citacao) {
+            mulherEncontrada.citacao = request.body.citacao
+        }
 
-    if (request.body.minibio) {
-        mulherEncontrada.minibio = request.body.minibio
-    }
+        const mulherAtualizadaNoBancoDeDados = await mulherEncontrada.save()
+        response.json(mulherAtualizadaNoBancoDeDados)
 
-    if (request.body.imagem) {
-        mulherEncontrada.imagem = request.body.imagem
+    } catch (erro) {
+        console.log(erro)
     }
-
-    response.json(mulheres)
 }
 
-//verbo HTTP DELETE - "Deleção" de mulher da lista:
-//será recebido um id como parâmetro e todas as mulheres com ID diferente daquele serão adicionadas a uma nova lista que
-//será retornada em formato json.
-function deletaMulher(request, response) {
-    function todasMenosEla(mulher) {
-        if(mulher.id !== request.params.id) {
-            return mulher
-        }
+//DELETE - Deleção de mulher do banco de dados:
+//para se comunicar com um serviço externo, utiliza-se o JS assíncrono para que o sertviço e outros recursos sejam carregados ao mesmo tempo: palavra reservada "async"
+async function deletaMulher(request, response) {
+    try {
+        await Mulher.findByIdAndDelete(request.params.id)
+        response.json({message: 'Diva Tech deletada com sucesso!'})
+    } catch (erro) {
+        console.log(erro)
     }
-    const mulheresQueFicaram = mulheres.filter(todasMenosEla)
-    response.json(mulheresQueFicaram)
 }
 
 
