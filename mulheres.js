@@ -33,18 +33,23 @@ async function mostraMulheres(request, response) {
     }
 }
 
-//POST - função para criar mulher
-function criaMulher(request, response){
-  const NovaMulher = {
-    id: uuidv4(),
-    nome: request.body.nome, //vem de dentro da requisição quando o nome for preenchido.
-    imagem: request.body.imagem,
-    minibio: request.body.minibio
-  }
-  //dados da nova mulher é inserida na lista de mulheres:
-  mulheres.push(NovaMulher)
-  //retorna lista atualizada:
-  response.json(mulheres)
+///POST - função para criar mulher
+async function criaMulher(request, response){
+    //Uma mulher é salva como objeto que tem a regra que vem do Model
+    const NovaMulher = new Mulher({
+      nome: request.body.nome, //vem de dentro da requisição quando o nome for preenchido.
+      imagem: request.body.imagem,
+      minibio: request.body.minibio,
+      citacao: request.body.citacao
+    })
+
+    try {
+        const mulherCriada = await NovaMulher.save()//os dados da nova mulher serão salvos;
+        response.status(201).json(mulherCriada) //se a nova mulher for salva com sucesso, será retornado o código 201;
+    
+    } catch (erro) {
+        console.log(erro)
+    }
 }
 
 //PATCH - correção de mulher
