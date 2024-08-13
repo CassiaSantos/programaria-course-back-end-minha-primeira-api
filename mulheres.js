@@ -2,8 +2,9 @@
 const express = require("express") 
 //configuraprimeira parte da rota:
 const router = express.Router()
-//biblioteca UUID:
-const{v4:uuidv4} = require('uuid')
+
+//cria variável Mulher para recuperar dados do Model --> será usada toda vez que me referir ao banco de dados no MONGO DB:
+const Mulher = require('./mulherModel')
 
 //uso de conexão com o banco de dados:
 const conectaBancoDeDados = require('./bancoDeDados')
@@ -16,30 +17,20 @@ app.use(express.json())
 //define porta:
 const porta = 3333
 
-//cria lista inicial de mulheres:
-const mulheres = [
- {
-  id: '1',
-  nome: 'Simara Conceição',
-  imagem: 'https://bit.ly/3LJIyOF',
-  minibio: 'Desenvolvedora e instrutora',
- },
- {
-  id: '2',
-  nome: 'Iana Chan',
-  imagem: 'https://bit.ly/3JCXBqP',
-  minibio: 'CEO & Founder da PrograMaria',
- },
- {
-  id: '3',
-  nome: 'Luana Pimentel',
-  imagem: 'https://bit.ly/3FKpFaz',
-  minibio: 'Senior Staff Software Engineer',
- }]
+// ----------------------------------------------- Métodos HTTP -----------------------------------------------
 
-//GET - função para exibir mulheres da lista
-function mostraMulheres(request, response) {
-    response.json(mulheres)
+//GET - função para exibir mulheres da lista cadastradas no banco de Dados
+async function mostraMulheres(request, response) {
+    try {
+        //espera a conexão com banco de dados e após ela ocorrer, recupera as mulheres cadastradas na lista de Divas
+        const mulheresVindasDoBancoDeDados = await Mulher.find()
+        //em seguida, retorna a lista de mulheres cadastadas no banco de dados em formato de Json:
+        response.json(mulheresVindasDoBancoDeDados)
+
+    //caso ocorra algum problema, mostre o erro no console
+    } catch (erro) {
+        console.log(erro)
+    }
 }
 
 //POST - função para criar mulher
