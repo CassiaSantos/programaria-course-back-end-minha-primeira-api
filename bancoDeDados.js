@@ -1,3 +1,10 @@
+/** Sobre o repositório:
+ * Curso: Back-end - Minha Primeira API
+ * Instituição de ensino: Programaria 
+ * Desenvolvedora: Cássia Oliveira dos Santos 👩‍💻
+ * GitHub: https://github.com/CassiaSantos/
+**/
+
 //Traz mongoose para dentro do meu proejto.
 const mongoose = require('mongoose')
 //traz dotenv para o projeto e chama a função config() para que seja possível conectar com o banco de dados:

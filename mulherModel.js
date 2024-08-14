@@ -1,3 +1,10 @@
+/** Sobre o repositório:
+ * Curso: Back-end - Minha Primeira API
+ * Instituição de ensino: Programaria 
+ * Desenvolvedora: Cássia Oliveira dos Santos 👩‍💻
+ * GitHub: https://github.com/CassiaSantos/
+**/
+
 //Traz mongoose para dentro do projeto:
 const mongoose = require('mongoose')
 const { type } = require('os')

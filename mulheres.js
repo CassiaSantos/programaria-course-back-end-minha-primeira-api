@@ -1,3 +1,10 @@
+/** Sobre o repositório:
+ * Curso: Back-end - Minha Primeira API
+ * Instituição de ensino: Programaria 
+ * Desenvolvedora: Cássia Oliveira dos Santos 👩‍💻
+ * GitHub: https://github.com/CassiaSantos/
+**/
+
 //inicia express:
 const express = require("express") 
 //configuraprimeira parte da rota:
