@@ -1,6 +1,6 @@
 #Diretórios
 node_modules
-exerciciosDoCurso
+exercicios_curso
 
 #arquivo com string de conexão com o banco de dados:
 .env
