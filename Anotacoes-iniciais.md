@@ -2,8 +2,12 @@
 
 ## Instalação de programas
 - Node JS: https://nodejs.org/en/download/prebuilt-installer/current
+- Insomnia: https://insomnia.rest/download
 
-## comando para instalações de pacotes com npm:
+## Sites:
+- Mongo DB: https://cloud.mongodb.com/
+  
+## Comandos para instalações de pacotes com npm:
 ``` npm init -y```
 
 ``` npm install express ``` - para instalar o pacote express
