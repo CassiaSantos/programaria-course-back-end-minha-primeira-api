@@ -10,15 +10,19 @@
 ## Comandos para instalações de pacotes com npm:
 ``` npm init -y```
 
-``` npm install express ``` - para instalar o pacote express
+``` npm install express ``` - para instalar o pacote express;
 
-```npm install uuid``` - para instalar o UUID e permitir geração de ids únicos e automáticos
+```npm install uuid``` - para instalar o UUID e permitir geração de ids únicos e automáticos;
 
-``` npm install mongoose ``` - pacote necessário para usar o Mongo DB
+``` npm install mongoose ``` - pacote necessário para usar o Mongo DB;
+
+``` npm install dotenv ``` - pacote express que cria variáveis de ambiente - necessário para proteger dados de configurações sensíveis;
+
+``` npm install cors ``` - pacote express que faz a liberação de CORS para que seja possível consumir a API no front-end;
 
 ## Pensamento computacional:
 ### Pilares:
 <p>Decomposição: dividir o problema em partes menores;</p>
 <p>Abstração: nomear conceitos</p>
 <p>Padrão: reconhecer padrões nas informações;</p>
-<p>Algoritmos: criar um passo a passo lógico para resolver problemas;</p>
+<p>Algoritmos: criar um passo a passo lógico para resolver problemas;</p> 

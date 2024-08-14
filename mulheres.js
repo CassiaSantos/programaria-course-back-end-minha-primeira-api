@@ -3,17 +3,21 @@ const express = require("express")
 //configuraprimeira parte da rota:
 const router = express.Router()
 
-//cria variável Mulher para recuperar dados do Model --> será usada toda vez que me referir ao banco de dados no MONGO DB:
-const Mulher = require('./mulherModel')
+//traz pacote cors do express para dentro do projeto e assim será possível consumir a API no front-end
+const cors = require('cors')
 
 //uso de conexão com o banco de dados:
 const conectaBancoDeDados = require('./bancoDeDados')
 conectaBancoDeDados()
+//cria variável Mulher para recuperar dados do Model --> será usada toda vez que me referir ao banco de dados no MONGO DB:
+const Mulher = require('./mulherModel')
 
 //inicia o app:
 const app = express()
 //trata resposta da requisição para formato jSON:
 app.use(express.json())
+//libera o uso da API pelo Front-end:
+app.use(cors())
 //define porta:
 const porta = 3333
 
