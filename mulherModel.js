@@ -5,6 +5,8 @@
  * GitHub: https://github.com/CassiaSantos/
 **/
 
+//Ao fazer o fork do projeto, terá que criar e cofigurar seu próprio banco de dados.
+
 //Traz mongoose para dentro do projeto:
 const mongoose = require('mongoose')
 const { type } = require('os')
